@@ -18,27 +18,29 @@ export async function createOrder() {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      intent: "CAPTURE",
-      purchase_units: [
-        {
-          amount: {
-            currency_code: "USD",
-            value: purchaseAmount,
+
+      "intent": "CAPTURE",
+    "purchase_units": [{
+      "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",
+      "amount": {
+       "currency_code": "USD",
+        "value": "10.00"
+      }
+    }],
+      "payment_source": {
+        "google_pay": {
+          "stored_credential": {
+            "payment_initiator": "CUSTOMER",
+            "payment_type": "RECURRING"
           },
-          payee: {
-            merchant_id: PAYPAL_MERCHANT_ID,
-          }
-        },
-      ],
-      payment_source: {
-        google_pay:{
-          attributes:{
-            verification: {
-              method: 'SCA_WHEN_REQUIRED',
-            },
+          "attributes": {
+            "vault": {
+              "store_in_vault": "ON_SUCCESS"
+            }
           }
         }
       }
+
     }),
   });
 
