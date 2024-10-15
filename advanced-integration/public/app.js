@@ -188,10 +188,7 @@ async function processPayment(paymentData) {
       }],
         "payment_source": {
           "google_pay": {
-            "stored_credential": {
-              "payment_initiator": "CUSTOMER",
-              "payment_type": "RECURRING"
-            },
+           
             "attributes": {
               "vault": {
                 "store_in_vault": "ON_SUCCESS"
