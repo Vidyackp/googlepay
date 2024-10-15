@@ -137,18 +137,18 @@ function getGoogleTransactionInfo(countryCode) {
     displayItems: [{
         label: "Subtotal",
         type: "SUBTOTAL",
-        price: "0.09",
+        price: "9",
       },
       {
         label: "Tax",
         type: "TAX",
-        price: "0.01",
+        price: "1",
       }
     ],
     countryCode: countryCode,
     currencyCode: "USD",
     totalPriceStatus: "FINAL",
-    totalPrice: "0.10",
+    totalPrice: "10",
     totalPriceLabel: "Total"
   };
 }
@@ -176,6 +176,31 @@ async function processPayment(paymentData) {
   try {  
     const { id } = await fetch(`/api/orders`,{
       method:'POST',
+      body:{
+
+        "intent": "CAPTURE",
+      "purchase_units": [{
+        "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",
+        "amount": {
+         "currency_code": "USD",
+          "value": "10.00"
+        }
+      }],
+        "payment_source": {
+          "google_pay": {
+            "stored_credential": {
+              "payment_initiator": "CUSTOMER",
+              "payment_type": "RECURRING"
+            },
+            "attributes": {
+              "vault": {
+                "store_in_vault": "ON_SUCCESS"
+              }
+            }
+          }
+        }
+
+      },
       headers : {
         'Content-Type': 'application/json'
       }
