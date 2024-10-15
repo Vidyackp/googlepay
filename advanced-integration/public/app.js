@@ -177,7 +177,6 @@ async function processPayment(paymentData) {
     const { id } = await fetch(`/api/orders`,{
       method:'POST',
       body:{
-
         "intent": "CAPTURE",
       "purchase_units": [{
         "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",
